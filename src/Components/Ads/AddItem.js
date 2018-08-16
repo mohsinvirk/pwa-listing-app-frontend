@@ -4,8 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/FavoriteBorder";
-
-import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/car.png";
@@ -31,7 +29,7 @@ const styles = theme => ({
     margin: "0 auto"
   },
   paper: {
-    padding: "20px 20px 35px 20px",
+    padding: "20px 10px 35px 10px",
     margin: "20px auto 20px"
   },
   responsiveimg: {
@@ -51,33 +49,24 @@ class AdItem extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid className={classes.container} container spacing={8}>
-        <Grid item xs={12} sm={6} md={4}>
-          <Paper className={classes.paper}>
-            <img
-              src={img}
-              alt="Ad thumbnail"
-              className={classes.responsiveimg}
-            />
-            <Link to="/" className={classes.link}>
-              <h3>Title of the Item</h3>
-            </Link>
-            <Typography color="primary">Lahore</Typography>
-            <p color="primary" className={classes.price}>
-              Rs 750,000
-            </p>
-            <Button
-              variant="fab"
-              color="secondary"
-              aria-label="Add"
-              className={classes.button}
-            >
-              <AddIcon />
-            </Button>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={2} />
-      </Grid>
+      <Paper className={classes.paper}>
+        <img src={img} alt="Ad thumbnail" className={classes.responsiveimg} />
+        <Link to="/" className={classes.link}>
+          <h3>Title of the Item</h3>
+        </Link>
+        <Typography color="primary">Lahore</Typography>
+        <p color="primary" className={classes.price}>
+          Rs 750,000
+        </p>
+        <Button
+          variant="fab"
+          color="secondary"
+          aria-label="Add"
+          className={classes.button}
+        >
+          <AddIcon />
+        </Button>
+      </Paper>
     );
   }
 }

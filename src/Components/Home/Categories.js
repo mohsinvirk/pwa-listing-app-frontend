@@ -32,7 +32,7 @@ function FullWidthGrid(props) {
         <Grid item xs={6} sm={2}>
           <CategoryItem
             linkTitle={"Pets"}
-            to={"/category/pers"}
+            to={"/category/pets"}
             style={{ backgroundColor: "#eee" }}
           />
         </Grid>

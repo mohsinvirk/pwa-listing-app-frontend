@@ -15,13 +15,13 @@ export const registerUser = (userData, history) => dispatch => {
     }
   })
     .then(res => res.json())
+    .then(response => history.push("/login"))
     .catch(error => {
       dispatch({
         type: GET_ERRORS,
         payload: error
       });
-    })
-    .then(response => history.push("/login"));
+    });
 };
 
 // Login - Get User Token
@@ -35,12 +35,6 @@ export const loginUser = userData => dispatch => {
     }
   })
     .then(res => res.json())
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err
-      });
-    })
     .then(response => {
       // Save to localStorage
       const { token } = response;
@@ -52,6 +46,12 @@ export const loginUser = userData => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      });
     });
 };
 

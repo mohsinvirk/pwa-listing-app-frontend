@@ -1,15 +1,44 @@
 import React, { Component } from "react";
-import { Dashboard } from "@material-ui/icons";
+import { connect } from "react-redux";
+import Header from "../Header/MainHeader.js";
+import Tabs from "./DashboardTabs";
+import { withStyles } from "@material-ui/core/styles";
 
-class Home extends Component {
+const styles = theme => ({
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    maxWidth: "1080px",
+    margin: "0 auto"
+  },
+  root: {
+    display: "flex",
+    flexWrap: "wrap"
+  }
+});
+
+class Dashboard extends Component {
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
-        <h1>This Is Dashboard</h1>
-        <Dashboard />
+        <Header />
+        <div className={classes.container}>
+          <br />
+          <Tabs />
+        </div>
       </div>
     );
   }
 }
 
-export default Home;
+const DashboardWithStyles = withStyles(styles)(Dashboard);
+
+const MapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default connect(MapStateToProps)(DashboardWithStyles);

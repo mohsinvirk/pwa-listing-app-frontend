@@ -8,7 +8,8 @@ import Register from "./Components/Register/RegisterPage";
 import AdItem from "./Components/Ads/AddItem";
 import SubmitAd from "./Components/SubmitAd/SubmitAdPage";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import PrivateRoute from "./Components/routes/PrivateRoute";
+import Category from "./Components/Category/Category";
+// import PrivateRoute from "./Components/routes/PrivateRoute";
 
 class App extends Component {
   render() {
@@ -20,8 +21,9 @@ class App extends Component {
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/ad" exact component={AdItem} />
-            <PrivateRoute path="/submitad" component={SubmitAd} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
+            <Route path="/submitad" component={SubmitAd} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/category/:category" component={Category} />
             <Route component={NoMatch} />
           </Switch>
         </div>

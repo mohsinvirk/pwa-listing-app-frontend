@@ -1,18 +1,27 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import RegisterForm from "./RegisterForm";
 import Header from "../Header/MainHeader";
 
-class Login extends React.Component {
+class Register extends React.Component {
   render() {
-    // const { classes } = this.props;
+    const { user } = this.props;
 
     return (
       <div>
         <Header />
         <RegisterForm />
+        {user.isAuthenticated && <Redirect to="/dashboard" />}
       </div>
     );
   }
 }
 
-export default Login;
+const MapStateToProps = state => {
+  return {
+    user: state.auth
+  };
+};
+
+export default connect(MapStateToProps)(Register);

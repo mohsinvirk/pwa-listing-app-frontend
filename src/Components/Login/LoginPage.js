@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import Header from "../Header/MainHeader";
 import { loginUser } from "../../actions/authActions";
 
 class Login extends React.Component {
   render() {
-    // const { classes } = this.props;
+    const { user } = this.props;
 
     return (
       <div>
@@ -16,9 +17,16 @@ class Login extends React.Component {
             this.props.dispatch(loginUser(data, this.props.history));
           }}
         />
+        {user.isAuthenticated && <Redirect to="/dashboard" />}
       </div>
     );
   }
 }
 
-export default connect()(Login);
+const MapStateToProps = state => {
+  return {
+    user: state.auth
+  };
+};
+
+export default connect(MapStateToProps)(Login);
