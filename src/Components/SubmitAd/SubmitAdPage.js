@@ -12,6 +12,7 @@ class AdItem extends React.Component {
         <AdItemForm
           onSubmit={ad => {
             this.props.dispatch(postAd(ad));
+            console.log(ad);
           }}
         />
       </div>

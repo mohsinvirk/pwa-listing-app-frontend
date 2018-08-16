@@ -8,7 +8,7 @@ export const postAd = (data, history) => dispatch => {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json; charset=utf-8"
+      "Content-Type": "multipart/form-data;"
     }
   })
     .then(res => res.json())

@@ -11,6 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Divider from "@material-ui/core/Divider";
+import ReactDropzone from "react-dropzone";
+// import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const styles = theme => ({
@@ -57,7 +59,7 @@ class InputAdornments extends React.Component {
     phone: 0,
     email: "",
     city: "",
-    image: "",
+    files: [],
     imagePreviewUrl: "",
     error: ""
   };
@@ -70,16 +72,24 @@ class InputAdornments extends React.Component {
     this.setState({ category: event.target.value });
     console.log(event.target.value);
   };
-
+  onPreviewDrop = files => {
+    this.setState({
+      files: this.state.files.concat(files)
+    });
+    console.log(files);
+  };
   _handleImageChange(e) {
     e.preventDefault();
 
     let reader = new FileReader();
     let file = e.target.files[0];
+    this.setState({
+      file: file
+    });
+    console.log(file);
 
     reader.onloadend = () => {
       this.setState({
-        image: file,
         imagePreviewUrl: reader.result
       });
     };
@@ -97,7 +107,7 @@ class InputAdornments extends React.Component {
       this.setState({
         error: ""
       });
-      this.props.onSubmit({
+      let data = {
         title: state.title,
         category: state.category,
         description: state.description,
@@ -106,9 +116,9 @@ class InputAdornments extends React.Component {
         name: state.name,
         email: state.email,
         phone: state.phone,
-        // image: state.image
-        image: state.imagePreviewUrl
-      });
+        files: state.files[0]
+      };
+      this.props.onSubmit(data);
     }
   };
 
@@ -258,21 +268,20 @@ class InputAdornments extends React.Component {
                   fullWidth
                   className={classNames(classes.margin, classes.textField)}
                 >
-                  <InputLabel htmlFor="adornment-password">
-                    Add Images
-                  </InputLabel>
-                  <Input
-                    id="image"
-                    type="file"
-                    onChange={e => this._handleImageChange(e)}
-                  />
+                  <ReactDropzone accept="image/*" onDrop={this.onPreviewDrop}>
+                    Drop an image, get a preview!
+                  </ReactDropzone>
                 </FormControl>
-                <img
-                  src={this.state.imagePreviewUrl}
-                  alt=""
-                  width="200px"
-                  style={{ padding: "20px", marginBottom: "20px" }}
-                />
+                {this.state.files.length > 0 && <h3>Previews</h3>}{" "}
+                {this.state.files.map(file => (
+                  <img
+                    src={file.preview}
+                    key={file.preview}
+                    alt="Preview"
+                    width="100px"
+                    style={{ padding: "20px", marginBottom: "20px" }}
+                  />
+                ))}
                 {this.state.error && <p>{this.state.error}</p>}
                 <Button
                   variant="contained"
