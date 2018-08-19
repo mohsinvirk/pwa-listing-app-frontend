@@ -12,7 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Divider from "@material-ui/core/Divider";
 import ReactDropzone from "react-dropzone";
-// import axios from "axios";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const styles = theme => ({
@@ -72,30 +72,37 @@ class InputAdornments extends React.Component {
     this.setState({ category: event.target.value });
     console.log(event.target.value);
   };
+  
   onPreviewDrop = files => {
     this.setState({
       files: this.state.files.concat(files)
     });
-    console.log(files);
-  };
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    this.setState({
-      file: file
-    });
-    console.log(file);
-
-    reader.onloadend = () => {
-      this.setState({
-        imagePreviewUrl: reader.result
+    const file = files[0];
+    axios
+      .post("http://localhost:8080/ads/images", { file })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
       });
-    };
+    fetch("http://localhost:8080/ads/images", {
+      method: "POST",
+      body: file,
+      headers: {
+        "Content-Type": "multipart/form-data;"
+      }
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    console.log({ file: files[0] });
+  };
 
-    reader.readAsDataURL(file);
-  }
   _handleSubmit = e => {
     e.preventDefault();
     const state = this.state;
@@ -118,7 +125,22 @@ class InputAdornments extends React.Component {
         phone: state.phone,
         files: state.files[0]
       };
-      this.props.onSubmit(data);
+      var url = "http://localhost:8080/ads";
+
+      fetch(url, {
+        method: "POST",
+        body: data,
+        headers: {
+          "Content-Type": "multipart/form-data;"
+        }
+      })
+        .then(res => res.json())
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   };
 
