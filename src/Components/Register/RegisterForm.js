@@ -8,7 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -76,8 +76,11 @@ class InputAdornments extends React.Component {
         }
       })
         .then(res => res.json())
-        .catch(error => console.error("Error:", error))
-        .then(response => console.log("Success:", response));
+        .then(response => {
+          console.log("Success:");
+          this.props.history.push("/login");
+        })
+        .catch(error => console.error("Error:", error));
     }
   };
 
@@ -167,4 +170,4 @@ InputAdornments.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(InputAdornments);
+export default withStyles(styles)(withRouter(InputAdornments));

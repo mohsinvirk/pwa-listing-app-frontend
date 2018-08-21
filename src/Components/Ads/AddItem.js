@@ -50,19 +50,25 @@ class AdItem extends React.Component {
     const { classes } = this.props;
     return (
       <Paper className={classes.paper}>
-        <img src={img} alt="Ad thumbnail" className={classes.responsiveimg} />
-        <Link to="/" className={classes.link}>
-          <h3>Title of the Item</h3>
+        <img
+          src={this.props.file}
+          alt="Ad thumbnail"
+          className={classes.responsiveimg}
+        />
+        <Link to={`/listings/${this.props.to}`} className={classes.link}>
+          <h3>{this.props.title}</h3>
         </Link>
-        <Typography color="primary">Lahore</Typography>
+        <Typography color="primary">{this.props.city}</Typography>
         <p color="primary" className={classes.price}>
-          Rs 750,000
+          Rs
+          {this.props.price}
         </p>
         <Button
           variant="fab"
           color="secondary"
           aria-label="Add"
           className={classes.button}
+          onClick={this.props.onClick}
         >
           <AddIcon />
         </Button>

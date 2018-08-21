@@ -24,7 +24,7 @@ export default class IconLabelTabs extends React.Component {
     return (
       <div>
         <div>
-          <Paper style={{ width: 1080 }}>
+          <Paper style={{ width: "100%" }}>
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}

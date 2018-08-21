@@ -12,7 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Divider from "@material-ui/core/Divider";
 import ReactDropzone from "react-dropzone";
-import axios from "axios";
+// import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const styles = theme => ({
@@ -55,7 +55,7 @@ class InputAdornments extends React.Component {
     name: "",
     description: "",
     price: 0,
-    Addresname: "",
+    address: "",
     phone: 0,
     email: "",
     city: "",
@@ -72,41 +72,24 @@ class InputAdornments extends React.Component {
     this.setState({ category: event.target.value });
     console.log(event.target.value);
   };
-  
+
   onPreviewDrop = files => {
     this.setState({
       files: this.state.files.concat(files)
     });
-    const file = files[0];
-    axios
-      .post("http://localhost:8080/ads/images", { file })
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    fetch("http://localhost:8080/ads/images", {
-      method: "POST",
-      body: file,
-      headers: {
-        "Content-Type": "multipart/form-data;"
-      }
-    })
-      .then(res => res.json())
-      .then(result => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log({ file: files[0] });
   };
 
   _handleSubmit = e => {
     e.preventDefault();
     const state = this.state;
-    if (!state.title || !state.description || !state.price || !state.phone) {
+    if (
+      !state.title ||
+      !state.description ||
+      !state.price ||
+      !state.city ||
+      !state.address ||
+      !state.phone
+    ) {
       this.setState({
         error: "Please fill all the feilds!"
       });
@@ -114,33 +97,30 @@ class InputAdornments extends React.Component {
       this.setState({
         error: ""
       });
-      let data = {
-        title: state.title,
-        category: state.category,
-        description: state.description,
-        price: state.price,
-        address: state.Addresname,
-        name: state.name,
-        email: state.email,
-        phone: state.phone,
-        files: state.files[0]
-      };
-      var url = "http://localhost:8080/ads";
-
-      fetch(url, {
-        method: "POST",
-        body: data,
-        headers: {
-          "Content-Type": "multipart/form-data;"
-        }
-      })
-        .then(res => res.json())
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      var formData = new FormData();
+      formData.append("title", state.title);
+      formData.append("category", state.category);
+      formData.append("description", state.description);
+      formData.append("address", state.address);
+      formData.append("price", state.price);
+      formData.append("name", state.name);
+      formData.append("email", state.email);
+      formData.append("city", state.city);
+      formData.append("phone", state.phone);
+      formData.append("file", state.files[0]);
+      // let data = {
+      //   title: state.title,
+      //   category: state.category,
+      //   description: state.description,
+      //   price: state.price,
+      //   address: state.Addresname,
+      //   name: state.name,
+      //   email: state.email,
+      //   phone: state.phone,
+      //   file: state.files[0]
+      // };
+      this.props.onSubmit(formData);
+      console.log(formData);
     }
   };
 
@@ -242,10 +222,10 @@ class InputAdornments extends React.Component {
                 >
                   <InputLabel htmlFor="adornment-password">Address</InputLabel>
                   <Input
-                    id="Addresname"
+                    id="address"
                     type="text"
-                    value={this.state.Addresname}
-                    onChange={this.handleChange("Addresname")}
+                    value={this.state.address}
+                    onChange={this.handleChange("address")}
                   />
                 </FormControl>
                 <FormControl

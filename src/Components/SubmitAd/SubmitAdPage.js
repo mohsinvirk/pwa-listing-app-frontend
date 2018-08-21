@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import AdItemForm from "./AdForm";
 import Header from "../Header/MainHeader";
 import { postAd } from "../../actions/ads";
-
+import { withRouter } from "react-router-dom";
 class AdItem extends React.Component {
   render() {
     return (
@@ -11,8 +11,8 @@ class AdItem extends React.Component {
         <Header />
         <AdItemForm
           onSubmit={ad => {
-            this.props.dispatch(postAd(ad));
-            console.log(ad);
+            this.props.dispatch(postAd(ad, this.props.history));
+            console.log("ad", ad);
           }}
         />
       </div>
@@ -20,4 +20,4 @@ class AdItem extends React.Component {
   }
 }
 
-export default connect()(AdItem);
+export default connect()(withRouter(AdItem));

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Header from "../Header/MainHeader.js";
 import Tabs from "./DashboardTabs";
 import { withStyles } from "@material-ui/core/styles";
+import { getAds } from "../../actions/ads";
 
 const styles = theme => ({
   container: {
@@ -18,6 +19,10 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+  componentDidMount() {
+    this.props.dispatch(getAds());
+  }
+
   render() {
     const { classes } = this.props;
 
