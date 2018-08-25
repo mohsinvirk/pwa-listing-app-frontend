@@ -59,11 +59,16 @@ class AdPage extends React.Component {
     });
     let content = filteredAds.map(item => {
       return (
-        <Grid className={classes.container} container spacing={24}>
+        <Grid
+          className={classes.container}
+          container
+          spacing={24}
+          key={item._id}
+        >
           <Grid item md={8} sm={12}>
             <Paper className={classes.paper}>
               <img
-                src={`/${item.file}`}
+                src={`https://olx-backend.herokuapp.com/${item.file}`}
                 alt="Ad thumbnail"
                 className={classes.responsiveimg}
               />

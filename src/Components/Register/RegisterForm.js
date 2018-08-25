@@ -66,7 +66,7 @@ class InputAdornments extends React.Component {
         email: this.state.email,
         password: this.state.password
       };
-      var url = "http://localhost:8080/users/register";
+      var url = "https://olx-backend.herokuapp.com/users/register";
 
       fetch(url, {
         method: "POST", // or 'PUT'

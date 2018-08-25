@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
 import AddItem from "../Ads/AddItem";
-import Header from "../Header/MainHeader";
 import { getAds } from "../../actions/ads";
 
 const styles = theme => ({
@@ -25,7 +24,7 @@ const styles = theme => ({
   },
   container: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     maxWidth: "1080px",
     margin: "0 auto"
   },
@@ -72,13 +71,16 @@ class AdsCategory extends React.Component {
     } else {
       postContent = filteredAds.map(item => {
         return (
-          <AddItem
-            file={`/${item.file}`}
-            title={item.title}
-            price={item.price}
-            key={item._id}
-            to={item._id}
-          />
+          <Grid item md={4} key={item._id}>
+            <AddItem
+              file={`https://olx-backend.herokuapp.com/${item.file}`}
+              title={item.title}
+              price={item.price}
+              key={item._id}
+              to={item._id}
+              avatar={user.avatar}
+            />
+          </Grid>
         );
       });
     }
@@ -101,9 +103,7 @@ class AdsCategory extends React.Component {
       <div>
         <div>
           <Grid container spacing={8} className={classes.container}>
-            <Grid item md={4}>
-              {postContent}
-            </Grid>
+            {postContent}
           </Grid>
         </div>
       </div>

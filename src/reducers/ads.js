@@ -1,4 +1,10 @@
-import { POST_AD, GET_ADS, IS_LOADING } from "../actions/types";
+import {
+  POST_AD,
+  GET_ADS,
+  IS_LOADING,
+  UPDATE_AD,
+  DELETE_AD
+} from "../actions/types";
 
 // Ads Reducer
 const initialState = {
@@ -26,8 +32,24 @@ export default (state = initialState, action) => {
         ...state,
         ads: [action.payload, ...state.ads]
       };
-    case "DELETE_AD":
-      return state.filter(({ id }) => id !== action.id);
+    case UPDATE_AD:
+      let mappedads = state.ads.map(ad => {
+        if (ad._id === action._id) {
+          return (ad = action.payload);
+        } else {
+          return ad;
+        }
+      });
+      return {
+        ...state,
+        ads: [...mappedads]
+      };
+    case DELETE_AD:
+      let ads = state.ads.filter(({ _id }) => _id !== action._id);
+      return {
+        ...state,
+        ads
+      };
     default:
       return state;
   }

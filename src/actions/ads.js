@@ -1,8 +1,15 @@
 // POST_AD
-import { GET_ERRORS, POST_AD, IS_LOADING, GET_ADS } from "./types";
+import {
+  GET_ERRORS,
+  POST_AD,
+  IS_LOADING,
+  GET_ADS,
+  UPDATE_AD,
+  DELETE_AD
+} from "./types";
 // Register User
 export const postAd = (formData, history) => dispatch => {
-  fetch("http://localhost:8080/ads", {
+  fetch("https://olx-backend.herokuapp.com/ads", {
     method: "POST",
     body: formData
   })
@@ -26,7 +33,7 @@ export const postAd = (formData, history) => dispatch => {
 
 export const getAds = () => dispatch => {
   dispatch(isLoading());
-  fetch("http://localhost:8080/ads")
+  fetch("https://olx-backend.herokuapp.com/ads")
     .then(res => res.json())
     .then(response => {
       dispatch({
@@ -45,19 +52,65 @@ export const getAds = () => dispatch => {
 };
 
 // UPDATE_AD
-export const putAd = payload => {
-  return {
-    type: "UPDATE_AD",
-    payload
-  };
+export const putAd = (data, _id, avatar) => dispatch => {
+  console.log(data);
+  fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
+    method: "PUT",
+    body: JSON.stringify(data), // data can be `string` or {object}!
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: UPDATE_AD,
+        payload: response,
+        _id
+      });
+      if (response.favorite === true) {
+        caches.open(`${response.id}`).then(cache => {
+          return cache.addAll([
+            `/listings/${response.id}`,
+            `https://olx-backend.herokuapp.com${response.file}`,
+            `/${avatar}`
+          ]);
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
 };
 
 //DELETE_AD
-export const deleteAd = id => {
-  return {
-    type: "DELETE_AD",
-    id
-  };
+export const deleteAd = (formData, history, _id) => dispatch => {
+  fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
+    method: "DELETE",
+    body: formData
+  })
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: DELETE_AD,
+        _id
+      });
+      history.push("/dashboard");
+    })
+    .catch(error => {
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
 };
 
 // If Loading ads

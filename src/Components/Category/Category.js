@@ -47,12 +47,15 @@ const styles = theme => ({
 });
 
 class AdsCategory extends React.Component {
+  state = {
+    favorite: true
+  };
   componentDidMount() {
     this.props.dispatch(getAds());
   }
 
   render() {
-    const { ads, classes } = this.props;
+    const { ads, classes, user } = this.props;
     const { category } = this.props.match.params;
     let filteredAds = ads.ads.filter(item => {
       return category === item.category;
@@ -73,13 +76,16 @@ class AdsCategory extends React.Component {
     } else {
       postContent = filteredAds.map(item => {
         return (
-          <AddItem
-            file={`/${item.file}`}
-            title={item.title}
-            price={item.price}
-            key={item.id}
-            to={item._id}
-          />
+          <Grid item md={4} key={item._id}>
+            <AddItem
+              file={`https://olx-backend.herokuapp.com/${item.file}`}
+              title={item.title}
+              price={item.price}
+              key={item._id}
+              to={item._id}
+              avatar={user.avatar}
+            />
+          </Grid>
         );
       });
     }
@@ -103,9 +109,7 @@ class AdsCategory extends React.Component {
         <Header />
         <div>
           <Grid container spacing={8} className={classes.container}>
-            <Grid item md={4}>
-              {postContent}
-            </Grid>
+            {postContent}
           </Grid>
         </div>
       </div>
@@ -115,7 +119,7 @@ class AdsCategory extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth,
+    user: state.auth.user,
     ads: state.ads
   };
 };

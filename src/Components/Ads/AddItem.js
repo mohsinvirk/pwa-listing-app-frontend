@@ -3,10 +3,11 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/FavoriteBorder";
+import { FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
-import img from "../../assets/images/car.png";
+import { connect } from "react-redux";
+import { putAd } from "../../actions/ads";
 
 const styles = theme => ({
   root: {
@@ -46,6 +47,19 @@ const styles = theme => ({
 });
 
 class AdItem extends React.Component {
+  state = {
+    favorite: true
+  };
+
+  _handleFavoriteClick = (id, avatar) => {
+    this.setState(prevState => {
+      return {
+        favorite: !prevState.favorite
+      };
+    });
+
+    this.props.dispatch(putAd({ favorite: this.state.favorite }, id, avatar));
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -68,13 +82,16 @@ class AdItem extends React.Component {
           color="secondary"
           aria-label="Add"
           className={classes.button}
-          onClick={this.props.onClick}
+          onClick={() =>
+            this._handleFavoriteClick(this.props.to, this.props.avatar)
+          }
         >
-          <AddIcon />
+          {this.state.favorite && <Favorite />}
+          {!this.state.favorite && <FavoriteBorderOutlined />}
         </Button>
       </Paper>
     );
   }
 }
 
-export default withStyles(styles)(AdItem);
+export default connect()(withStyles(styles)(AdItem));

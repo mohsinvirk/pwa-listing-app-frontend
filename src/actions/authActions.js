@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_CURRENT_PROFILE } from "./types";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  var url = "http://localhost:8080/users/register";
+  var url = "https://olx-backend.herokuapp.com/users/register";
 
   fetch(url, {
     method: "POST",
@@ -26,7 +26,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
-  var url = "http://localhost:8080/users/login";
+  var url = "https://olx-backend.herokuapp.com/users/login";
   fetch(url, {
     method: "POST",
     body: JSON.stringify(userData),
