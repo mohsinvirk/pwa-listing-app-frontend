@@ -1,0 +1,14 @@
+{
+  "runtime~main.js": "/static/js/runtime~main.41117e05.js",
+  "runtime~main.js.map": "/static/js/runtime~main.41117e05.js.map",
+  "vendors.js": "/static/js/vendors.e427fbce.chunk.js",
+  "vendors.js.map": "/static/js/vendors.e427fbce.chunk.js.map",
+  "main.css": "/static/css/main.edbdffa2.chunk.css",
+  "main.js": "/static/js/main.2b484c8d.chunk.js",
+  "main.js.map": "/static/js/main.2b484c8d.chunk.js.map",
+  "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg",
+  "static/media/phone.png": "/static/media/phone.078e4099.png",
+  "static/media/home.png": "/static/media/home.6fedfd2f.png",
+  "static/media/car.png": "/static/media/car.130c758b.png",
+  "index.html": "/index.html"
+}
