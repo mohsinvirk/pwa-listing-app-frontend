@@ -69,10 +69,10 @@ export const putAd = (data, _id, avatar) => dispatch => {
         _id
       });
       if (response.favorite === true) {
-        caches.open(`${response.id}`).then(cache => {
+        caches.open(`${response._id}`).then(cache => {
           return cache.addAll([
-            `/listings/${response.id}`,
-            `https://olx-backend.herokuapp.com${response.file}`,
+            `/listings/${response._id}`,
+            `https://olx-backend.herokuapp.com/${response.file}`,
             `/${avatar}`
           ]);
         });

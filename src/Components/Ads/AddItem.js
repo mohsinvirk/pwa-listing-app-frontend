@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
+import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { putAd } from "../../actions/ads";
@@ -51,15 +52,10 @@ class AdItem extends React.Component {
     favorite: true
   };
 
-  _handleFavoriteClick = (id, avatar) => {
-    this.setState(prevState => {
-      return {
-        favorite: !prevState.favorite
-      };
-    });
-
-    this.props.dispatch(putAd({ favorite: this.state.favorite }, id, avatar));
+  _handleFavoriteClick = (id, avatar, favorite) => {
+    this.props.dispatch(putAd({ favorite: !favorite }, id, avatar));
   };
+
   render() {
     const { classes } = this.props;
     return (
@@ -77,18 +73,24 @@ class AdItem extends React.Component {
           Rs
           {this.props.price}
         </p>
-        <Button
-          variant="fab"
-          color="secondary"
-          aria-label="Add"
-          className={classes.button}
-          onClick={() =>
-            this._handleFavoriteClick(this.props.to, this.props.avatar)
-          }
-        >
-          {this.state.favorite && <Favorite />}
-          {!this.state.favorite && <FavoriteBorderOutlined />}
-        </Button>
+        <Tooltip title="Add To Favorites and Save Offline">
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="Add"
+            className={classes.button}
+            onClick={() =>
+              this._handleFavoriteClick(
+                this.props.to,
+                this.props.avatar,
+                this.props.favorite
+              )
+            }
+          >
+            {this.props.favorite && <Favorite />}
+            {!this.props.favorite && <FavoriteBorderOutlined />}
+          </Button>
+        </Tooltip>
       </Paper>
     );
   }

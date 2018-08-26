@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -59,19 +59,13 @@ class AdsCategory extends React.Component {
     if (ads.isLoading) {
       postContent = (
         <div className={classes.root}>
-          <LinearProgress />
-          <br />
-          <LinearProgress color="secondary" />
-          <br />
-          <LinearProgress />
-          <br />
-          <LinearProgress color="secondary" />
+          <CircularProgress />
         </div>
       );
     } else {
       postContent = filteredAds.map(item => {
         return (
-          <Grid item md={4} key={item._id}>
+          <Grid item md={4} sm={6} key={item._id}>
             <AddItem
               file={`https://olx-backend.herokuapp.com/${item.file}`}
               title={item.title}
@@ -79,6 +73,7 @@ class AdsCategory extends React.Component {
               key={item._id}
               to={item._id}
               avatar={user.avatar}
+              favorite={item.favorite}
             />
           </Grid>
         );
