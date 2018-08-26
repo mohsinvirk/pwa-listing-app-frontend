@@ -29,8 +29,6 @@
     "file-loader": "^2.0.0",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
-    "live-server": "^1.2.0",
-    "moment": "2.18.1",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",
     "react": "^16.4.1",
