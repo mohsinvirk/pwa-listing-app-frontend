@@ -3,10 +3,54 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Expensify</title>
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="stylesheet" type="text/css" href="/styles.css" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OLX</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="icon" type="image/png" href="/images/icons/icon-72x72.png" />
+  <link rel="stylesheet" type="text/css" href="/public/styles.css" />
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="OLX">
+  <meta name="msapplication-TileImage" content="/src/images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#fff">
+  <meta name="theme-color" content="#3f51b5">
+  <style>
+    .App {
+      text-align: center;
+    }
+
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 80px;
+    }
+
+    .App-header {
+      background-color: #222;
+      height: 150px;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .App-title {
+      font-size: 1.5em;
+    }
+
+    .App-intro {
+      font-size: large;
+    }
+
+    @keyframes App-logo-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -14,9 +58,7 @@
   <script src="/bundle.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js');
-      });
+      navigator.serviceWorker.register('/sw.js');
     }
   </script>
 </body>
