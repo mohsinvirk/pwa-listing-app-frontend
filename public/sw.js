@@ -5,12 +5,11 @@ const filesToCache = [
   "/index.html",
   "/bundle.js",
   "/offline.html",
-  "/style.css",
   "/6fedfd2f4311ae981b567f5400593065.png",
   "/130c758b58543f3850943fc590e2f7dc.png",
   "078e4099958ec114547bd5e5cd28ee7f.png",
   "/images/favicon.png",
-  "sw.js",
+  "/sw.js",
   "https://olx-backend.herokuapp.com/ads"
 ];
 
@@ -44,9 +43,7 @@ self.addEventListener("fetch", e => {
       .then(response => {
         const clonedResponse = response.clone();
         if (
-          e.request.url.indexOf(
-            "https://api.github.com/users/defunkt/followers"
-          ) !== -1
+          e.request.url.indexOf("https://olx-backend.herokuapp.com/ads") !== -1
         ) {
           caches.open(dynaimcCache).then(cache => {
             cache.put(e.request, clonedResponse);
@@ -73,8 +70,6 @@ self.addEventListener("fetch", e => {
   );
 });
 
-let deferredPrompt;
-window.addEventListener("beforeinstallprompt", e => {
+self.addEventListener("beforeinstallprompt", e => {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
-  e.prompt();
 });
