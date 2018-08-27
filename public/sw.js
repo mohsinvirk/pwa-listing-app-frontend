@@ -1,3 +1,4 @@
+importScripts("/firebase-messaging-sw.js");
 const static_cache = "static-cache-01";
 const dynaimcCache = "dynamic-cache-01";
 const filesToCache = [
@@ -68,8 +69,4 @@ self.addEventListener("fetch", e => {
         });
       })
   );
-});
-
-self.addEventListener("beforeinstallprompt", e => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
 });

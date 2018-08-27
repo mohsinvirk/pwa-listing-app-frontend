@@ -56,10 +56,58 @@
 <body>
   <div id="app"></div>
   <script src="/bundle.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB5NABy3RXBOf14ZJpngxx7CfhZF3EEvKE",
+      authDomain: "olxapp-1e846.firebaseapp.com",
+      databaseURL: "https://olxapp-1e846.firebaseio.com",
+      projectId: "olxapp-1e846",
+      storageBucket: "",
+      messagingSenderId: "552385731622"
+    };
+    firebase.initializeApp(config);
+
+    let messaging = firebase.messaging();
+    messaging
+      .requestPermission()
+      .then(function () {
+        console.log("Notification permission granted.");
+        // Retrieve an Instance ID token for use with FCM.
+        return messaging.getToken();
+      }).then(function (token) {
+        // Displaying user token
+        console.log('token >>>> ', token);
+      })
+      .catch(function (err) {
+        console.log("Unable to get permission to notify.", err);
+      });
+    messaging.onMessage(function (payload) {
+      console.log('onMessage', payload);
+    });
+  </script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js');
     }
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      console.log(e);
+      // Stash the event so it can be triggered later.
+      e.prompt();
+      deferredPrompt.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          deferredPrompt = null;
+        });
+    });
+
+
   </script>
 </body>
 

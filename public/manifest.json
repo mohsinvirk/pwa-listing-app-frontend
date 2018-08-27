@@ -8,6 +8,7 @@
   "orientation": "portrait",
   "start_url": "/",
   "dir": "ltr",
+  "gcm_sender_id": "552385731622",
   "lang": "en-US",
   "icons": [
     {

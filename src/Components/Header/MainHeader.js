@@ -10,9 +10,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Hidden from "@material-ui/core/Hidden";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
@@ -22,9 +19,13 @@ import { CloudUploadOutlined as CloudUploadIcon } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
 
-const drawerWidth = 150;
+const drawerWidth = 250;
 
 const styles = theme => ({
+  link: {
+    textDecoration: "none",
+    color: "#000"
+  },
   button: {
     margin: theme.spacing.unit
   },
@@ -47,7 +48,7 @@ const styles = theme => ({
     margin: "0 auto"
   },
   appFrame: {
-    height: 330,
+    height: 100,
     zIndex: 1,
     overflow: "hidden",
     position: "relative",
@@ -162,63 +163,49 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
-  handleChangeAnchor = event => {
-    this.setState({
-      anchor: event.target.value
-    });
-  };
-
   render() {
     const { classes, theme } = this.props;
     const { anchor, open } = this.state;
 
     const drawer = (
-      <Hidden className={classes.mobileOnly}>
-        <Drawer
-          variant="persistent"
-          anchor={anchor}
-          open={open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          className={classes.mobileOnly}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton
-              onClick={this.handleDrawerClose}
-              className={classes.mobileOnly}
-              style={{ color: "#000" }}
-            >
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <MenuItem>Mohsin</MenuItem>
-            <MenuItem>Hassan</MenuItem>
-            <MenuItem>Hamza</MenuItem>
-            <MenuItem>Amir</MenuItem>
-          </List>
-          <Divider />
-          <List>
-            <MenuItem>Logout</MenuItem>
-          </List>
-        </Drawer>
-      </Hidden>
+      <div>
+        <List>
+          <MenuItem>
+            <Link to="/dashboard" className={classes.link}>
+              Dashboard
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/dashboard" className={classes.link}>
+              Messages
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/dashboard" className={classes.link}>
+              Favorites
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/login" className={classes.link}>
+              Login
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/register" className={classes.link}>
+              Register
+            </Link>
+          </MenuItem>
+        </List>
+        <Divider />
+        <List>
+          <MenuItem>
+            <Link to="/submitad" className={classes.link}>
+              Post Ad
+            </Link>
+          </MenuItem>
+        </List>
+      </div>
     );
-
-    let before = null;
-    let after = null;
-
-    if (anchor === "left") {
-      before = drawer;
-    } else {
-      after = drawer;
-    }
 
     return (
       <Grid container className={classes.container}>
@@ -237,19 +224,35 @@ class PersistentDrawer extends React.Component {
                   backgroundColor: "white"
                 }}
               >
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={this.handleDrawerOpen}
-                  className={classNames(
-                    classes.menuButton,
-                    open && classes.hide,
-                    classes.mobileOnly
-                  )}
-                  style={{ color: "black" }}
-                >
-                  <MenuIcon />
-                </IconButton>
+                <div className={classes.mobileOnly}>
+                  <IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={this.handleDrawerOpen}
+                    className={classNames(
+                      classes.menuButton,
+                      open && classes.hide,
+                      classes.mobileOnly
+                    )}
+                    style={{ color: "black" }}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Drawer
+                    open={open}
+                    onClose={this.handleDrawerClose}
+                    className={classes.mobileOnly}
+                  >
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      onClick={this.handleDrawerClose}
+                      onKeyDown={this.handleDrawerClose}
+                    >
+                      {drawer}
+                    </div>
+                  </Drawer>
+                </div>
                 <header className={classes.logoAndTagline}>
                   <div
                     style={{
@@ -303,33 +306,6 @@ class PersistentDrawer extends React.Component {
                 </div>
               </Toolbar>
             </AppBar>
-            {before}
-            <main
-              className={classNames(
-                classes.mobileOnly,
-                classes.content,
-                classes[`content-${anchor}`],
-                {
-                  [classes.contentShift]: open,
-                  [classes[`contentShift-${anchor}`]]: open
-                }
-              )}
-            >
-              <div className={classes.drawerHeader} />
-              <div
-                style={{
-                  letterSpacing: "3px",
-                  lineHeight: "2rem",
-                  textAlign: "center"
-                }}
-              >
-                <h1>"Buy, Sell, Compare"</h1>
-                <h3 style={{ letterSpacing: "5px", fontWeight: "500" }}>
-                  Search more than 8 lac listings across Pakistan today
-                </h3>
-              </div>
-            </main>
-            {after}
           </div>
         </div>
       </Grid>

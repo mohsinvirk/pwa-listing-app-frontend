@@ -62,7 +62,7 @@ class AdPage extends React.Component {
         <Grid
           className={classes.container}
           container
-          spacing={24}
+          spacing={8}
           key={item._id}
         >
           <Grid item md={8} sm={12}>
