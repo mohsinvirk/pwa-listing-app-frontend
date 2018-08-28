@@ -52,7 +52,7 @@ export const getAds = () => dispatch => {
 };
 
 // UPDATE_AD
-export const putAd = (data, _id, avatar) => dispatch => {
+export const putAd = (data, _id, avatar, fEmail) => dispatch => {
   console.log(data);
   fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
     method: "PUT",
@@ -68,12 +68,12 @@ export const putAd = (data, _id, avatar) => dispatch => {
         payload: response,
         _id
       });
-      if (response.favorite === true) {
+      if (response.favorite === true && response.fEmail === fEmail) {
         caches.open(`${response._id}`).then(cache => {
           return cache.addAll([
             `/listings/${response._id}`,
             `https://olx-backend.herokuapp.com/${response.file}`,
-            `/${avatar}`
+            `${avatar}`
           ]);
         });
       }

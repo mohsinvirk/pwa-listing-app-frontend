@@ -53,7 +53,17 @@ class AdItem extends React.Component {
   };
 
   _handleFavoriteClick = (id, avatar, favorite) => {
-    this.props.dispatch(putAd({ favorite: !favorite }, id, avatar));
+    this.props.dispatch(
+      putAd(
+        {
+          favorite: !favorite,
+          fEmail: this.props.user.email
+        },
+        id,
+        avatar,
+        this.props.user.email
+      )
+    );
   };
 
   render() {
@@ -96,4 +106,11 @@ class AdItem extends React.Component {
   }
 }
 
-export default connect()(withStyles(styles)(AdItem));
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    ads: state.ads
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(AdItem));

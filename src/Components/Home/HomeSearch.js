@@ -209,6 +209,24 @@ const components = {
 class TextFieldMargins extends React.Component {
   componentDidMount() {
     this.props.dispatch(getAds());
+
+    setTimeout(() => {
+      if (this.props.ads.ads.length >= 1) {
+        this.props.ads.ads.map(item => {
+          if (item.favorite === true && item.fEmail === this.props.user.email) {
+            caches.open(`${item._id}`).then(cache => {
+              return cache.addAll([
+                `/listings/${item._id}`,
+                `https://olx-backend.herokuapp.com/${item.file}`,
+                `${this.props.user.avatar}`
+              ]);
+            });
+          } else {
+            return item;
+          }
+        });
+      }
+    }, 3000);
   }
   state = {
     single: null,

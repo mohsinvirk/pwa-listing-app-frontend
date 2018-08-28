@@ -70,6 +70,10 @@
     firebase.initializeApp(config);
 
     let messaging = firebase.messaging();
+
+    // Add the public key generated from the console here.
+    messaging.usePublicVapidKey("BEDz0g6bQEEvbHqcP9sWZlOnc-2CXg-EtIUOFo8_GXLboGmPiG0xkQcMC1A-QIZHAWUCzl3PcgTKOX2S4LkyWSE");
+
     messaging
       .requestPermission()
       .then(function () {
@@ -83,6 +87,8 @@
       .catch(function (err) {
         console.log("Unable to get permission to notify.", err);
       });
+
+
     messaging.onMessage(function (payload) {
       console.log('onMessage', payload);
     });
