@@ -95,7 +95,22 @@
   </script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
+      navigator.serviceWorker.register('/sw.js')
+        .then(function (reg) {
+          console.log('Successfully Register :^)', reg);
+
+          reg.pushManager.subscribe({
+            userVisibleOnly: true
+          }).then(function (subscription) {
+            console.log('subscription:', subscription.toJSON());
+            // GCM were used this endpoint
+            console.log('endpoint:', subscription.endpoint);
+          });
+
+        }).catch(function (error) {
+          console.log('SW Registration Failed: :^(', error);
+        });
+
     }
     var deferredPrompt;
 
