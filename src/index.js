@@ -5,7 +5,11 @@ import jwt_decode from "jwt-decode";
 
 import store from "./Store/store";
 import "./index.css";
+<<<<<<< HEAD
 import App from "./router";
+=======
+import App from "./App";
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 import registerServiceWorker from "./registerServiceWorker";
 import {
   setCurrentUser,

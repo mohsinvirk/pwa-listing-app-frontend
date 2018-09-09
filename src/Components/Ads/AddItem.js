@@ -3,6 +3,7 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+<<<<<<< HEAD
 import {
   FavoriteBorderOutlined,
   Favorite,
@@ -13,6 +14,13 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { putAd, deleteAd } from "../../actions/ads";
+=======
+import { FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
+import Paper from "@material-ui/core/Paper";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { putAd } from "../../actions/ads";
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 
 const styles = theme => ({
   root: {
@@ -39,8 +47,12 @@ const styles = theme => ({
     margin: "20px auto 20px"
   },
   responsiveimg: {
+<<<<<<< HEAD
     maxWidth: "100%",
     height: "200px"
+=======
+    maxWidth: "100%"
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
   },
   link: {
     textDecoration: "none"
@@ -56,6 +68,7 @@ class AdItem extends React.Component {
   state = {
     favorite: true
   };
+<<<<<<< HEAD
   _handleDelClick = id => {
     this.props.dispatch(deleteAd(id));
   };
@@ -74,6 +87,18 @@ class AdItem extends React.Component {
     );
   };
 
+=======
+
+  _handleFavoriteClick = (id, avatar) => {
+    this.setState(prevState => {
+      return {
+        favorite: !prevState.favorite
+      };
+    });
+
+    this.props.dispatch(putAd({ favorite: this.state.favorite }, id, avatar));
+  };
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
   render() {
     const { classes } = this.props;
     return (
@@ -91,6 +116,7 @@ class AdItem extends React.Component {
           Rs
           {this.props.price}
         </p>
+<<<<<<< HEAD
         <Tooltip title="Add To Favorites and Save Offline">
           <Button
             variant="fab"
@@ -120,11 +146,26 @@ class AdItem extends React.Component {
             {<DeleteOutlined />}
           </Button>
         )}
+=======
+        <Button
+          variant="fab"
+          color="secondary"
+          aria-label="Add"
+          className={classes.button}
+          onClick={() =>
+            this._handleFavoriteClick(this.props.to, this.props.avatar)
+          }
+        >
+          {this.state.favorite && <Favorite />}
+          {!this.state.favorite && <FavoriteBorderOutlined />}
+        </Button>
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
       </Paper>
     );
   }
 }
 
+<<<<<<< HEAD
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
@@ -133,3 +174,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(AdItem));
+=======
+export default connect()(withStyles(styles)(AdItem));
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37

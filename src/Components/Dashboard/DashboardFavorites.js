@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+<<<<<<< HEAD
 import { CircularProgress } from "@material-ui/core";
+=======
+import LinearProgress from "@material-ui/core/LinearProgress";
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -59,13 +63,27 @@ class AdsCategory extends React.Component {
     if (ads.isLoading) {
       postContent = (
         <div className={classes.root}>
+<<<<<<< HEAD
           <CircularProgress />
+=======
+          <LinearProgress />
+          <br />
+          <LinearProgress color="secondary" />
+          <br />
+          <LinearProgress />
+          <br />
+          <LinearProgress color="secondary" />
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
         </div>
       );
     } else {
       postContent = filteredAds.map(item => {
         return (
+<<<<<<< HEAD
           <Grid item md={4} sm={6} key={item._id}>
+=======
+          <Grid item md={4} key={item._id}>
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
             <AddItem
               file={`https://olx-backend.herokuapp.com/${item.file}`}
               title={item.title}
@@ -73,7 +91,10 @@ class AdsCategory extends React.Component {
               key={item._id}
               to={item._id}
               avatar={user.avatar}
+<<<<<<< HEAD
               favorite={item.favorite}
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
             />
           </Grid>
         );

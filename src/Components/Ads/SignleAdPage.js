@@ -12,8 +12,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { PhoneAndroidOutlined } from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
+<<<<<<< HEAD
 import Header from "../Header/MainHeader";
 import AlertDialog from "./Dialog";
+=======
+import img from "../../assets/images/car.png";
+import Header from "../Header/MainHeader";
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 import { getAds } from "../../actions/ads";
 
 const styles = theme => ({
@@ -62,7 +67,11 @@ class AdPage extends React.Component {
         <Grid
           className={classes.container}
           container
+<<<<<<< HEAD
           spacing={8}
+=======
+          spacing={24}
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
           key={item._id}
         >
           <Grid item md={8} sm={12}>
@@ -106,7 +115,11 @@ class AdPage extends React.Component {
                   src={user.avatar}
                   className={classes.avatar}
                 />
+<<<<<<< HEAD
                 <h3 style={{ marginLeft: "1rem" }}>{item.name}</h3>
+=======
+                <h3 style={{ marginLeft: "1rem" }}>Mohsin Latif</h3>
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
               </div>
               <ListItem button>
                 <ListItemIcon>
@@ -117,7 +130,10 @@ class AdPage extends React.Component {
                   primary={<a href={`tel:${item.phone}`}>{item.phone}</a>}
                 />
               </ListItem>
+<<<<<<< HEAD
               <AlertDialog senderName={item.name} senderEmail={item.email} />
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
             </Paper>
           </Grid>
         </Grid>

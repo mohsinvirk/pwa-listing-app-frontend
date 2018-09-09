@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+<<<<<<< HEAD
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { SearchSharp as Search } from "@material-ui/icons";
@@ -16,8 +19,11 @@ import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
+<<<<<<< HEAD
 import { getAds } from "../../actions/ads";
 
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -207,6 +213,7 @@ const components = {
 };
 
 class TextFieldMargins extends React.Component {
+<<<<<<< HEAD
   componentDidMount() {
     this.props.dispatch(getAds());
 
@@ -228,10 +235,13 @@ class TextFieldMargins extends React.Component {
       }
     }, 3000);
   }
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
   state = {
     single: null,
     multi: null
   };
+<<<<<<< HEAD
   handleChange = name => value => {
     this.setState({
       [name]: value
@@ -265,6 +275,13 @@ class TextFieldMargins extends React.Component {
 
   _handleSubmit = () => {
     this.props.history.push(`/listings/${this.state.ad.value}`);
+=======
+
+  handleChange = name => value => {
+    this.setState({
+      [name]: value
+    });
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
   };
 
   render() {
@@ -294,6 +311,7 @@ class TextFieldMargins extends React.Component {
                 components={components}
                 value={this.state.single}
                 className={classes.textField}
+<<<<<<< HEAD
                 onChange={this.handleCityChange("single")}
                 placeholder="Search a city"
               />
@@ -310,12 +328,28 @@ class TextFieldMargins extends React.Component {
                 placeholder="Search an Ad"
               />
             </NoSsr>
+=======
+                onChange={this.handleChange("single")}
+                placeholder="Search a city"
+              />
+            </NoSsr>
+            <TextField
+              label="Search listing"
+              id="margin-normal"
+              className={classes.textField}
+              fullWidth
+              margin="normal"
+            />
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
             <Button
               variant="contained"
               color="primary"
               className={classes.button}
               style={{ backgroundColor: "#FF7700" }}
+<<<<<<< HEAD
               type="submit"
+=======
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
             >
               Search
               <Search className={classes.leftIcon} />
@@ -330,6 +364,7 @@ class TextFieldMargins extends React.Component {
 TextFieldMargins.propTypes = {
   classes: PropTypes.object.isRequired
 };
+<<<<<<< HEAD
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
@@ -340,3 +375,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(
   withRouter(withStyles(styles)(TextFieldMargins))
 );
+=======
+
+export default withStyles(styles)(TextFieldMargins);
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37

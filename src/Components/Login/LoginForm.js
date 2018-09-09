@@ -54,11 +54,17 @@ class InputAdornments extends React.Component {
         error: "Please fill all the feilds correctly"
       });
     } else {
+<<<<<<< HEAD
       const fcmToken = localStorage.getItem("FCMtoken");
       let data = {
         email: this.state.email,
         password: this.state.password,
         fcmToken
+=======
+      let data = {
+        email: this.state.email,
+        password: this.state.password
+>>>>>>> b5b6232405cc36abd779f43e23579d67209c0a37
       };
       this.props.onSubmit(data);
     }
