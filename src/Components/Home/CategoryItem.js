@@ -20,7 +20,11 @@ const styles = theme => ({
   },
   link: {
     color: "#000",
-    textDecoration: "none"
+    textDecoration: "none",
+    display: "block",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0 auto"
   }
 });
 
@@ -30,11 +34,13 @@ function PaperSheet(props) {
   return (
     <div>
       <Paper className={classes.paperMain}>
-        <Typography variant="headline" component="p">
-          <Link to={props.to} className={classes.link}>
-            {props.linkTitle}
-          </Link>
-        </Typography>
+        <Link to={props.to} className={classes.link}>
+          <p style={{ textAlign: "center", margin: "5px auto" }}>
+            {" "}
+            {props.linkTitle}{" "}
+          </p>
+          {props.icon}
+        </Link>
       </Paper>
     </div>
   );

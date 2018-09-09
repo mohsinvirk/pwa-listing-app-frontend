@@ -12,8 +12,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { PhoneAndroidOutlined } from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
-import img from "../../assets/images/car.png";
 import Header from "../Header/MainHeader";
+import AlertDialog from "./Dialog";
 import { getAds } from "../../actions/ads";
 
 const styles = theme => ({
@@ -106,7 +106,7 @@ class AdPage extends React.Component {
                   src={user.avatar}
                   className={classes.avatar}
                 />
-                <h3 style={{ marginLeft: "1rem" }}>Mohsin Latif</h3>
+                <h3 style={{ marginLeft: "1rem" }}>{item.name}</h3>
               </div>
               <ListItem button>
                 <ListItemIcon>
@@ -117,6 +117,7 @@ class AdPage extends React.Component {
                   primary={<a href={`tel:${item.phone}`}>{item.phone}</a>}
                 />
               </ListItem>
+              <AlertDialog senderName={item.name} senderEmail={item.email} />
             </Paper>
           </Grid>
         </Grid>

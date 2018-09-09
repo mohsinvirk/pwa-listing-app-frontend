@@ -1,7 +1,7 @@
 // import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-
+import axios from "axios";
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_CURRENT_PROFILE } from "./types";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -45,8 +45,24 @@ export const loginUser = userData => dispatch => {
         setAuthToken(token);
         // Decode token to get user data
         const decoded = jwt_decode(token);
+
         // Set current user
         dispatch(setCurrentUser(decoded));
+
+        var tokenurl = "https://olx-backend.herokuapp.com/settoken";
+        let fcmtoken = localStorage.getItem("FCMtoken");
+        axios
+          .post(tokenurl, { email: decoded.email, fcmtoken })
+          .then(response => {
+            // Save to localStorage
+            console.log(response);
+          })
+          .catch(err => {
+            dispatch({
+              type: GET_ERRORS,
+              payload: err
+            });
+          });
       }
     })
     .catch(err => {

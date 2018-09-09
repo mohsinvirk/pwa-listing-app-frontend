@@ -53,7 +53,7 @@ class AdsCategory extends React.Component {
   render() {
     const { ads, classes, user } = this.props;
     let filteredAds = ads.ads.filter(item => {
-      return user.email === item.email;
+      return user.user.email === item.email;
     });
     let postContent;
     if (ads.isLoading) {
@@ -74,6 +74,7 @@ class AdsCategory extends React.Component {
               to={item._id}
               avatar={user.avatar}
               favorite={item.favorite}
+              auth={user.isAuthenticated}
             />
           </Grid>
         );
@@ -108,7 +109,7 @@ class AdsCategory extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user,
+    user: state.auth,
     ads: state.ads
   };
 };

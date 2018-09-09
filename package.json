@@ -17,7 +17,7 @@
     "@material-ui/icons": "^2.0.0",
     "axios": "^0.18.0",
     "babel-cli": "6.24.1",
-    "babel-core": "6.25.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "7.1.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.23.0",
@@ -51,5 +51,10 @@
     "validator": "^10.5.0",
     "webpack": "3.1.0",
     "webpack-dev-server": "^2.5.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^23.4.2",
+    "jest": "^23.5.0",
+    "regenerator-runtime": "^0.12.1"
   }
 }

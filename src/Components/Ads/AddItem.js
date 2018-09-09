@@ -3,12 +3,16 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
+import {
+  FavoriteBorderOutlined,
+  Favorite,
+  DeleteOutlined
+} from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { putAd } from "../../actions/ads";
+import { putAd, deleteAd } from "../../actions/ads";
 
 const styles = theme => ({
   root: {
@@ -35,7 +39,8 @@ const styles = theme => ({
     margin: "20px auto 20px"
   },
   responsiveimg: {
-    maxWidth: "100%"
+    maxWidth: "100%",
+    height: "200px"
   },
   link: {
     textDecoration: "none"
@@ -50,6 +55,9 @@ const styles = theme => ({
 class AdItem extends React.Component {
   state = {
     favorite: true
+  };
+  _handleDelClick = id => {
+    this.props.dispatch(deleteAd(id));
   };
 
   _handleFavoriteClick = (id, avatar, favorite) => {
@@ -101,6 +109,17 @@ class AdItem extends React.Component {
             {!this.props.favorite && <FavoriteBorderOutlined />}
           </Button>
         </Tooltip>
+        {this.props.auth && (
+          <Button
+            variant="fab"
+            color="secondary"
+            aria-label="Add"
+            className={classes.button}
+            onClick={() => this._handleDelClick(this.props.to)}
+          >
+            {<DeleteOutlined />}
+          </Button>
+        )}
       </Paper>
     );
   }

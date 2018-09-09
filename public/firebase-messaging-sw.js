@@ -23,13 +23,14 @@ self.addEventListener("push", function(event) {
   var body = notification.body || "We have received a push message.";
   var icon = "/images/icon-192x192.png";
   // var tag = 'simple-push-demo-notification-tag';
-
+  var notificationOptions = {
+    body,
+    icon
+  };
+  console.log(notificationOptions);
+  self.registration.showNotification(title, notificationOptions);
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: body,
-      icon: icon
-      // tag: tag
-    })
+    self.registration.showNotification(title, notificationOptions)
   );
 });
 

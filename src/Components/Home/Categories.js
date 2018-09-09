@@ -1,7 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { PetsOutlined, Car } from "@material-ui/icons";
 import Grid from "@material-ui/core/Grid";
+import property from "../../assets/svg/001-architecture-and-city.svg";
+import services from "../../assets/svg/001-support.svg";
+import pets from "../../assets/svg/002-cat.svg";
+import fashion from "../../assets/svg/002-chef.svg";
+import bike from "../../assets/svg/003-bike.svg";
+import agri from "../../assets/svg/003-cotton.svg";
+import cars from "../../assets/svg/004-car.svg";
+import sports from "../../assets/svg/004-gym.svg";
+import electronics from "../../assets/svg/005-microchip.svg";
+import mobiles from "../../assets/svg/006-mobile-phone.svg";
+import furniture from "../../assets/svg/007-bed.svg";
+import books from "../../assets/svg/008-book.svg";
 
 import CategoryItem from "./CategoryItem";
 
@@ -17,6 +30,11 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     textAlign: "center",
     color: theme.palette.text.secondary
+  },
+  img: {
+    display: "flex",
+    alignSelf: "center",
+    width: "50px"
   }
 });
 
@@ -34,46 +52,89 @@ function FullWidthGrid(props) {
             linkTitle={"Pets"}
             to={"/category/pets"}
             style={{ backgroundColor: "#eee" }}
+            icon={<img src={pets} alt="cat icon" className={classes.img} />}
           />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Cars"} to={"/category/cars"} />
+          <CategoryItem
+            linkTitle={"Cars"}
+            to={"/category/cars"}
+            icon={<img src={cars} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Property"} to={"/category/property"} />
+          <CategoryItem
+            linkTitle={"Property"}
+            to={"/category/property"}
+            icon={<img src={property} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Bikes"} to={"/category/bikes"} />
+          <CategoryItem
+            linkTitle={"Bikes"}
+            to={"/category/bikes"}
+            icon={<img src={bike} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
           <CategoryItem
             linkTitle={"Electronics"}
             to={"/category/electronics"}
+            icon={
+              <img src={electronics} alt="cat icon" className={classes.img} />
+            }
           />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Mobiles"} to={"/category/mobiles"} />
+          <CategoryItem
+            linkTitle={"Mobiles"}
+            to={"/category/mobiles"}
+            icon={<img src={mobiles} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Furniture"} to={"/category/furniture"} />
+          <CategoryItem
+            linkTitle={"Furniture"}
+            to={"/category/furniture"}
+            icon={
+              <img src={furniture} alt="cat icon" className={classes.img} />
+            }
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Books"} to={"/category/books"} />
+          <CategoryItem
+            linkTitle={"Books"}
+            to={"/category/books"}
+            icon={<img src={books} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Services"} to={"/category/services"} />
+          <CategoryItem
+            linkTitle={"Services"}
+            to={"/category/services"}
+            icon={<img src={services} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Fashion"} to={"/category/fashion"} />
+          <CategoryItem
+            linkTitle={"Fashion"}
+            to={"/category/fashion"}
+            icon={<img src={fashion} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
           <CategoryItem
             linkTitle={"Agriculture"}
             to={"/category/agriculture"}
+            icon={<img src={agri} alt="cat icon" className={classes.img} />}
           />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Sports"} to={"/category/sports"} />
+          <CategoryItem
+            linkTitle={"Sports"}
+            to={"/category/sports"}
+            icon={<img src={sports} alt="cat icon" className={classes.img} />}
+          />
         </Grid>
       </Grid>
     </div>

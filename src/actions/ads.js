@@ -90,10 +90,10 @@ export const putAd = (data, _id, avatar, fEmail) => dispatch => {
 };
 
 //DELETE_AD
-export const deleteAd = (formData, history, _id) => dispatch => {
+export const deleteAd = _id => dispatch => {
   fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
     method: "DELETE",
-    body: formData
+    body: _id
   })
     .then(res => res.json())
     .then(response => {
@@ -101,7 +101,7 @@ export const deleteAd = (formData, history, _id) => dispatch => {
         type: DELETE_AD,
         _id
       });
-      history.push("/dashboard");
+      console.log(response);
     })
     .catch(error => {
       if (error) {
